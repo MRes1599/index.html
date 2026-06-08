@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ניטור עצמי — המהפכה השקטה שמשנה את הדרך שבה אנחנו מבינים את הגוף | ANOX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green: #3d6b4f;
+  --green-light: #eef5f0;
+  --green-mid: #5a8a6a;
+  --text: #1a1a18;
+  --text-mid: #4a4a46;
+  --text-light: #7a7a76;
+  --border: #e0ddd8;
+  --bg: #faf9f7;
+  --white: #ffffff;
+  --serif: 'Frank Ruhl Libre', Georgia, serif;
+  --sans: 'Heebo', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.75;
+  direction: rtl;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ─── TOP BAR ─── */
+.topbar {
+  background: var(--green);
+  color: #fff;
+  font-size: 13px;
+  text-align: center;
+  padding: 8px 20px;
+  letter-spacing: 0.02em;
+}
+
+/* ─── SITE HEADER ─── */
+.site-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+}
+.site-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.site-logo {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: -0.01em;
+}
+.site-logo span { color: var(--text); font-weight: 400; font-size: 14px; margin-right: 8px; }
+.site-nav { display: flex; gap: 28px; }
+.site-nav a {
+  font-size: 14px;
+  color: var(--text-mid);
+  font-weight: 400;
+  transition: color 0.15s;
+}
+.site-nav a:hover { color: var(--green); }
+.header-tag {
+  font-size: 11px;
+  background: var(--green-light);
+  color: var(--green);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* ─── BREADCRUMB ─── */
+.breadcrumb {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 40px;
+  font-size: 13px;
+  color: var(--text-light);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.breadcrumb a { color: var(--text-light); }
+.breadcrumb a:hover { color: var(--green); }
+.breadcrumb-sep { color: var(--border); }
+
+/* ─── MAIN LAYOUT ─── */
+.page-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 60px;
+  align-items: start;
+}
+
+/* ─── ARTICLE ─── */
+.article-header { margin-bottom: 28px; }
+.article-category {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 14px;
+  display: block;
+}
+.article-title {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1.25;
+  color: var(--text);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+.article-subtitle {
+  font-size: 18px;
+  color: var(--text-mid);
+  line-height: 1.6;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+.meta-item { font-size: 13px; color: var(--text-light); }
+.meta-sep { color: var(--border); font-size: 18px; }
+.meta-tag {
+  font-size: 11px;
+  background: #f0ece6;
+  color: var(--text-mid);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* ─── HERO IMAGE ─── */
+.hero-image {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 32px;
+  display: block;
+}
+.hero-image-placeholder {
+  width: 100%;
+  height: 380px;
+  background: linear-gradient(135deg, #2d5a3d 0%, #4a7c5a 40%, #6a9e7a 100%);
+  border-radius: 4px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-image-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-text-overlay {
+  color: rgba(255,255,255,0.9);
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  z-index: 1;
+  padding: 20px;
+  line-height: 1.4;
+}
+
+/* ─── BODY TEXT ─── */
+.article-body { font-size: 16.5px; line-height: 1.85; color: var(--text); }
+.article-body p { margin-bottom: 22px; }
+.article-body h2 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 40px 0 16px;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.article-body h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 32px 0 12px;
+}
+
+/* ─── PULL QUOTE ─── */
+.pull-quote {
+  border-right: 4px solid var(--green);
+  padding: 20px 24px;
+  margin: 36px 0;
+  background: var(--green-light);
+  border-radius: 0 8px 8px 0;
+}
+.pull-quote p {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--green);
+  margin: 0 !important;
+}
+
+/* ─── INLINE PRODUCT CARD ─── */
+.product-embed {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 36px 0;
+  background: var(--white);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.product-embed-inner {
+  display: flex;
+  gap: 0;
+}
+.product-embed-img {
+  width: 180px;
+  min-width: 180px;
+  background: #f4f2ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.product-embed-img img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+}
+.product-embed-body {
+  padding: 22px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.embed-badge {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green);
+  background: var(--green-light);
+  padding: 3px 10px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.embed-name {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.embed-desc {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+.embed-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.embed-price-row { display: flex; align-items: baseline; gap: 10px; }
+.embed-price { font-size: 22px; font-weight: 500; color: var(--text); font-family: var(--serif); }
+.embed-price-old { font-size: 14px; color: var(--text-light); text-decoration: line-through; }
+.embed-save { font-size: 12px; color: var(--green); background: var(--green-light); padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+.embed-cta {
+  display: inline-block;
+  background: var(--green);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 11px 22px;
+  border-radius: 8px;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.embed-cta:hover { background: #2d5038; }
+
+/* ─── FEATURE LIST ─── */
+.feature-block {
+  background: #f5f3ef;
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin: 32px 0;
+}
+.feature-block h4 {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--text);
+}
+.feature-list { list-style: none; }
+.feature-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 9px 0;
+  border-bottom: 1px solid #e8e5e0;
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+.feature-list li:last-child { border-bottom: none; }
+.fi-check { color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+/* ─── COMPARISON ─── */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 32px 0;
+}
+.comp-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+.comp-card-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.comp-card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+
+/* ─── ARTICLE DIVIDER ─── */
+.a-divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+/* ─── SHARE BAR ─── */
+.share-bar {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.share-label { font-size: 14px; color: var(--text-light); }
+.share-btn {
+  font-size: 13px;
+  padding: 7px 16px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-mid);
+  background: var(--white);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.share-btn:hover { border-color: var(--green); color: var(--green); }
+
+/* ─── SIDEBAR ─── */
+.sidebar { position: sticky; top: 24px; }
+.sidebar-widget {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px;
+  margin-bottom: 24px;
+}
+.widget-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--green-light);
+}
+.recent-list { list-style: none; }
+.recent-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+.recent-list li:last-child { border-bottom: none; }
+.recent-list a { color: var(--text-mid); }
+.recent-list a:hover { color: var(--green); }
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag-pill {
+  font-size: 12px;
+  padding: 5px 12px;
+  background: #f0ece6;
+  color: var(--text-mid);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.tag-pill:hover { background: var(--green-light); color: var(--green); }
+
+/* sidebar product mini */
+.sidebar-product {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-product:last-child { border-bottom: none; }
+.sp-img {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  background: #f4f2ef;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.sp-img img { width: 100%; height: 100%; object-fit: contain; }
+.sp-info { flex: 1; }
+.sp-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+.sp-price { font-size: 13px; color: var(--green); font-weight: 500; }
+.sp-price-old { font-size: 11px; color: var(--text-light); text-decoration: line-through; margin-right: 4px; }
+
+/* ─── FOOTER ─── */
+.site-footer {
+  background: var(--text);
+  color: rgba(255,255,255,0.65);
+  padding: 40px;
+  margin-top: 60px;
+  font-size: 13px;
+  text-align: center;
+  line-height: 1.8;
+}
+.site-footer a { color: rgba(255,255,255,0.5); }
+.footer-note { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 14px; line-height: 1.6; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 780px) {
+  .page-layout { grid-template-columns: 1fr; padding: 0 20px 40px; }
+  .site-header-inner { padding: 0; }
+  .site-nav { display: none; }
+  .article-title { font-size: 26px; }
+  .product-embed-inner { flex-direction: column; }
+  .product-embed-img { width: 100%; height: 200px; }
+  .comparison-grid { grid-template-columns: 1fr; }
+  .breadcrumb { padding: 12px 20px; }
+  .site-header { padding: 0 20px; }
+}
+
+.reviews-grid { display: flex; flex-direction: column; gap: 20px; margin: 32px 0; }
+.review-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.reviewer-avatar {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+}
+.reviewer-info { flex: 1; }
+.reviewer-name { font-size: 15px; font-weight: 500; color: var(--text); }
+.reviewer-role { font-size: 13px; color: var(--text-light); }
+.review-stars { color: #e8a020; font-size: 15px; letter-spacing: 1px; }
+.review-text { font-size: 15px; color: var(--text-mid); line-height: 1.75; margin: 0 !important; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">בריאות | ניטור | ביצועים — מגזין ה-wellness של ישראל</div>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-logo">WELLNESS<span>מגזין בריאות</span></div>
+    <nav class="site-nav">
+      <a href="#">בריאות</a>
+      <a href="#">ניטור עצמי</a>
+      <a href="#">תזונה</a>
+      <a href="#">כושר</a>
+      <a href="#">מוצרים</a>
+    </nav>
+    <span class="header-tag">תוכן ממומן</span>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">ראשי</a>
+  <span class="breadcrumb-sep">/</span>
+  <a href="#">בריאות וניטור</a>
+  <span class="breadcrumb-sep">/</span>
+  <span>ניטור עצמי — המהפכה השקטה</span>
+</div>
+
+<!-- MAIN PAGE -->
+<div class="page-layout">
+
+  <!-- ── ARTICLE ── -->
+  <main>
+
+    <div class="article-header">
+      <span class="article-category">ניטור עצמי | בריאות חכמה</span>
+      <h1 class="article-title">ניטור עצמי — המהפכה השקטה שמשנה את הדרך שבה אנחנו מבינים את הגוף</h1>
+      <p class="article-subtitle">מיליוני אנשים ישנים רע, מרגישים עייפות כרונית ולא מצליחים לשנות כלום — כי הם פועלים לפי תחושה בלי נתונים. הגיע הזמן לשנות את זה.</p>
+      <div class="article-meta">
+        <span class="meta-item">מערכת wellness ישראל</span>
+        <span class="meta-sep">·</span>
+        <span class="meta-item">יוני 2026</span>
+        <span class="meta-sep">·</span>
+        <span class="meta-item">זמן קריאה: 5 דקות</span>
+        <span class="meta-sep">·</span>
+        <span class="meta-tag">תוכן ממומן</span>
+      </div>
+    </div>
+
+    <!-- HERO IMAGE -->
+    <div style="width:100%;margin-bottom:32px;border-radius:10px;overflow:hidden;">
+      <img src="img_hero.png" alt="ניטור עצמי wellness" style="width:100%;height:auto;display:block;">
+    </div>
+
+    <!-- ARTICLE BODY -->
+    <div class="article-body">
+
+      <p>טרנד ה-wellness העולמי חדר לישראל בעשור האחרון בעוצמה — יוגה, מדיטציה, תזונה נכונה, חופשות ריטריט. אבל בשנים האחרונות צמח תחום חדש שמחבר בין הטכנולוגיה לבין ההבנה העצמית: <strong>self-tracking</strong> — ניטור עצמי של נתוני הגוף בזמן אמת.</p>
+
+      <p>הרעיון פשוט: בלי נתונים אי אפשר לשפר דבר. אנשים שמקפידים על בריאות הבינו שהתחושה לבדה לא מספיקה. כשאתה רואה בפעם הראשונה שאתה מתעורר 7 פעמים בלילה, שדופק המנוחה שלך גבוה ב-20% מהממוצע הרצוי, או שפעילותך היומית נמוכה פי שניים ממה שחשבת — זה משנה את הפרספקטיבה.</p>
+
+      <div class="pull-quote">
+        <p>"ראיתי בפעם הראשונה שישנתי 6 שעות ורבע בממוצע, כשחשבתי שאני ישן 8. שום דבר לא יכול היה לשכנע אותי כמו הגרף הזה."</p>
+      </div>
+
+      <h2>מה זה ניטור עצמי ולמה זה רלוונטי לכולם</h2>
+
+      <p>עד לפני כמה שנים, ניטור נתוני הגוף היה נחלת ספורטאים מקצועיים. היום, עם כניסתם של מכשירים קטנים, זולים ומדויקים — הכל השתנה. כל אחד יכול לעקוב אחרי דופק, שינה, צעדים, לחץ דם וסטרס — מבלי לשנות שום דבר בשגרתו.</p>
+
+      <p>תרבות ה-wellness המודרנית כוללת תחומים רבים: תזונה נכונה, פעילות גופנית, שקט נפשי, מדיטציה. ניטור עצמי הוא השכבה שמחברת את כולם — הנתונים שמראים לך איפה אתה עומד ומה כדאי לשפר.</p>
+
+      <!-- PRODUCT EMBED 1 -->
+      <div class="product-embed">
+        <div class="product-embed-inner">
+          <div class="product-embed-img">
+            <img src="img_v4.png" alt="ANOX V4" loading="lazy">
+          </div>
+          <div class="product-embed-body">
+            <div>
+              <span class="embed-badge">המומלץ שלנו</span>
+              <div class="embed-name">ANOX V4 — רצועת הניטור החכמה</div>
+              <p class="embed-desc">מעקב דופק, שינה, צעדים, לחץ דם וסטרס. אפליקציה חינמית ב-Android ו-iOS, Bluetooth, עמיד למים IP67. סוללה עד 60 יום. מגיע בשחור, ורוד, כחול וכתום.</p>
+            </div>
+            <div class="embed-footer">
+              <div class="embed-price-row">
+                <span class="embed-price">249 ₪</span>
+                <span class="embed-price-old">319 ₪</span>
+                <span class="embed-save">חסכת 21%</span>
+              </div>
+              <a class="embed-cta" href="https://anoxil.com/products/anox-v4" target="_blank">לצפייה ורכישה</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>המדדים שכל אחד צריך לעקוב אחריהם</h2>
+
+      <p>לא כל מדד מתאים לכל אחד. אבל ישנם חמישה מדדים בסיסיים שמעניקים תמונה מלאה על מצב הגוף — ואפשר לעקוב אחריהם ביומיום ללא מאמץ:</p>
+
+      <div class="feature-block">
+        <h4>המדדים שכדאי לעקוב אחריהם</h4>
+        <ul class="feature-list">
+          <li><span class="fi-check">✓</span><span><strong>דופק לב במנוחה</strong> — המדד הבסיסי ביותר לבריאות הלב. ירידה בדופק המנוחה לאורך זמן היא סימן לשיפור כושר.</span></li>
+          <li><span class="fi-check">✓</span><span><strong>איכות שינה ושלבי שינה</strong> — כמה זמן שינה עמוקה קיבלת? זה המדד שהכי הרבה אנשים מופתעים ממנו.</span></li>
+          <li><span class="fi-check">✓</span><span><strong>סטרס רגעי לאורך היום</strong> — מדידת עוצמת הלחץ מאפשרת לזהות אילו שעות ביום מאמיצות אותך יותר.</span></li>
+          <li><span class="fi-check">✓</span><span><strong>פעילות ותנועה יומית</strong> — לא רק אימונים, אלא כמה אתה זז בסך הכל. הנתון שמשנה הכי הרבה אנשים יושבים.</span></li>
+          <li><span class="fi-check">✓</span><span><strong>לחץ דם</strong> — מעקב שוטף ללא ביקור רופא, שמאפשר לזהות מגמות לפני שהן הופכות לבעיה.</span></li>
+        </ul>
+      </div>
+
+      <hr class="a-divider">
+
+      <h2>ניטור הרכב הגוף — מעבר למשקל</h2>
+
+      <p>המשקל שעל המשקל הוא אחד המדדים הפחות מדויקים לבריאות. שני אנשים באותו משקל יכולים להיות במצבי כושר שונים לחלוטין — אחד עם 30% שומן גוף, השני עם 15%. הרכב הגוף — אחוז שומן, מסת שריר, מים בגוף, צפיפות עצם — נותן תמונה אמיתית.</p>
+
+      <p>הדרך הפשוטה לקבל את הנתונים האלה ביתית: משקל חכם שמשתמש בטכנולוגיית ביו-אימפדנס — זרם חשמלי קל שעובר דרך הגוף ומחשב את ההרכב. פשוט, מהיר, ומדויק.</p>
+
+      <!-- PRODUCT EMBED 2 -->
+      <div class="product-embed">
+        <div class="product-embed-inner">
+          <div class="product-embed-img">
+            <img src="img_scale.png" alt="משקל חכם ANOX" loading="lazy">
+          </div>
+          <div class="product-embed-body">
+            <div>
+              <span class="embed-badge">ניטור מלא של הגוף</span>
+              <div class="embed-name">משקל חכם — כל נתוני הגוף בעמידה אחת</div>
+              <p class="embed-desc">מודד אחוז שומן, מסת שריר, מים בגוף, עצמות, BMR ועוד 10 פרמטרים. מתחבר לאפליקציה ועוקב אחרי השינויים לאורך זמן. מחיר מבצע.</p>
+            </div>
+            <div class="embed-footer">
+              <div class="embed-price-row">
+                <span class="embed-price">499 ₪</span>
+                <span class="embed-price-old">749 ₪</span>
+                <span class="embed-save">חסכת 33%</span>
+              </div>
+              <a class="embed-cta" href="https://anoxil.com/products/%D7%9E%D7%A9%D7%A7%D7%9C-%D7%97%D7%9B%D7%9D-%D7%9C%D7%9E%D7%93%D7%99%D7%93%D7%AA-%D7%9B%D7%9C-%D7%A0%D7%AA%D7%95%D7%A0%D7%99-%D7%94%D7%92%D7%95%D7%A3" target="_blank">לצפייה ורכישה</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="a-divider">
+
+      <h2>הניטור הבלתי נראה — כשהמכשיר נראה כמו תכשיט</h2>
+
+      <p>אחת ההתנגדויות הנפוצות לרצועות ניטור היא האסתטיקה. "זה נראה ספורטיבי מדי." "לא מתאים לי ללבוש בעבודה." "בפגישות זה נראה לא מקצועי." הטרנד האחרון בשוק הניטור פותר בדיוק את זה.</p>
+
+      <p>טבעות חכמות (Smart Rings) נראות כמו תכשיט רגיל — זהב, כסף, שחור — ובתוכן חיישנים מלאים שמנטרים שינה, דופק וסטרס לאורך כל היום ולילה. ללא מסך, ללא שום סימן חיצוני שזהו מכשיר טכנולוגי.</p>
+
+      <!-- PRODUCT EMBED 3 -->
+      <div class="product-embed">
+        <div class="product-embed-inner">
+          <div class="product-embed-img">
+            <img src="img_halo.png" alt="HALO RING" loading="lazy">
+          </div>
+          <div class="product-embed-body">
+            <div>
+              <span class="embed-badge">עיצוב דיסקרטי</span>
+              <div class="embed-name">HALO RING — טבעת ניטור חכמה</div>
+              <p class="embed-desc">נראית כמו תכשיט, עובדת כמו מכשיר ניטור מקצועי. זמינה בזהב, כסף ושחור, במגוון מידות. מתאימה לשימוש 24/7 — גם בשינה, גם בעבודה.</p>
+            </div>
+            <div class="embed-footer">
+              <div class="embed-price-row">
+                <span class="embed-price">149 ₪</span>
+                <span class="embed-price-old">389 ₪</span>
+                <span class="embed-save">חסכת 61%</span>
+              </div>
+              <a class="embed-cta" href="https://anoxil.com/products/halo-ring" target="_blank">לצפייה ורכישה</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>רצועת ניטור או טבעת חכמה — מה מתאים לך?</h2>
+
+      <p>שתי הגישות מספקות נתונים טובים — ההבדל הוא בחוויית השימוש ובמה שחשוב לך יותר:</p>
+
+      <div class="comparison-grid">
+        <div class="comp-card">
+          <div class="comp-card-title">רצועת ניטור (ANOX V4)</div>
+          <p>מסך מובנה לנתונים בזמן אמת, מתאים לאימונים ולשגרה פעילה. מחיר 249 ₪. אידיאלי אם אתה רוצה גישה מיידית למדדים על שורש כף היד.</p>
+        </div>
+        <div class="comp-card">
+          <div class="comp-card-title">טבעת חכמה (HALO RING)</div>
+          <p>ניטור רציף ובלתי נראה, עיצוב של תכשיט. מחיר 149 ₪. אידיאלי אם אתה רוצה מעקב 24/7 בלי שאיש שם לב שאתה לובש מכשיר.</p>
+        </div>
+      </div>
+
+      <p>חלק מהאנשים משלבים את שניהם — הטבעת בלילה ובמפגשים מקצועיים, הצמיד בזמן פעילות גופנית. אין תשובה אחת נכונה.</p>
+
+      <hr class="a-divider">
+
+
+      <hr class="a-divider">
+
+      <h2>מה אנשים אמרו אחרי שהתחילו לנטר את עצמם</h2>
+
+      <p>אספנו חוות דעת מאנשים שעשו את הצעד — ורצינו לשמוע מה השתנה בפועל, לא רק בתיאוריה.</p>
+
+      <div class="reviews-grid">
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar" style="background:#3d6b4f;">ד</div>
+            <div class="reviewer-info">
+              <div class="reviewer-name">דניאל כהן, 34</div>
+              <div class="reviewer-role">מנהל פרויקטים, תל אביב</div>
+            </div>
+            <div class="review-stars">★★★★★</div>
+          </div>
+          <p class="review-text">שלושה שבועות עם הצמיד וגיליתי שאני ישן בממוצע 5:40 שעות בלילה. חשבתי שאני ישן 7. מאז שיניתי את שעת השינה שלי ב-45 דקות, ואני מרגיש הבדל מוחשי באנרגיה. אין מצב שהייתי מאמין בלי לראות את הנתונים.</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar" style="background:#7a4a3a;">מ</div>
+            <div class="reviewer-info">
+              <div class="reviewer-name">מיכל לוי, 29</div>
+              <div class="reviewer-role">פיזיותרפיסטית, חיפה</div>
+            </div>
+            <div class="review-stars">★★★★★</div>
+          </div>
+          <p class="review-text">קניתי את הצמיד כי רציתי לעקוב אחרי דופק בזמן אימון. מה שלא ציפיתי זה שהמדד הסטרס שלי יהיה גבוה מאוד בשעות 14:00–16:00 כל יום. הבנתי שהפגישות הכי תובעניות שלי מתרכזות שם ושיניתי את הלו"ז. זה שינה לי את שגרת העבודה.</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar" style="background:#4a5a7a;">א</div>
+            <div class="reviewer-info">
+              <div class="reviewer-name">אמיר שפירא, 41</div>
+              <div class="reviewer-role">יזם, רמת גן</div>
+            </div>
+            <div class="review-stars">★★★★★</div>
+          </div>
+          <p class="review-text">אני לא בן אדם של "ספורט וכושר", אבל הצמיד עזר לי להבין שאני זז מעט מדי במהלך היום. התחלתי עם יעד של 7,000 צעדים ביום. שלושה חודשים אחר כך אני בממוצע 9,500. לא כי מישהו אמר לי, אלא כי הנתון היומי שם אותי אחראי כלפי עצמי.</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-avatar" style="background:#6a4a7a;">נ</div>
+            <div class="reviewer-info">
+              <div class="reviewer-name">נועה ברזילי, 26</div>
+              <div class="reviewer-role">סטודנטית לתזונה, ירושלים</div>
+            </div>
+            <div class="review-stars">★★★★★</div>
+          </div>
+          <p class="review-text">לומדת תזונה ותמיד חשבתי שאני מבינה את הגוף שלי. הצמיד הראה לי שדופק המנוחה שלי גבוה ב-12 פעימות מהממוצע הרצוי לגילי. עם שינויי תזונה ו-3 שבועות הליכות ערב — הוא ירד. לראות את השינוי בגרף זה סיפוק שאי אפשר לתאר.</p>
+        </div>
+
+      </div>
+      <h2>איך מתחילים — שלב אחד בפעם</h2>
+
+      <p>הטעות הנפוצה היא לנסות לשנות הכל בבת אחת. גישת הניטור העצמי מציעה משהו אחר: תתחיל להבין, ורק אז תחליט מה לשנות. שבוע ראשון — רק מעקב, ללא שינוי. שבוע שני — מזהה דפוס אחד ומתמקד בו.</p>
+
+      <p>הנתונים הם לא המטרה — הם הכלי. המטרה היא חיים עם יותר אנרגיה, שינה טובה יותר, והבנה עמוקה יותר של מה הגוף שלך צריך.</p>
+
+      <!-- SHARE BAR -->
+      <div class="share-bar">
+        <span class="share-label">שתפו:</span>
+        <button class="share-btn" onclick="navigator.share ? navigator.share({title: document.title, url: location.href}) : alert('העתק את הקישור מסרגל הכתובת')">Facebook</button>
+        <button class="share-btn">WhatsApp</button>
+        <button class="share-btn">העתק קישור</button>
+      </div>
+
+    </div>
+    <!-- /article-body -->
+
+  </main>
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+
+    <!-- Products sidebar widget -->
+    <div class="sidebar-widget">
+      <div class="widget-title">המוצרים המוזכרים בכתבה</div>
+      <div class="sidebar-product">
+        <div class="sp-img">
+          <img src="img_v4.png" alt="ANOX V4" loading="lazy">
+        </div>
+        <div class="sp-info">
+          <div class="sp-name">ANOX V4</div>
+          <div><span class="sp-price-old">319 ₪</span><span class="sp-price">249 ₪</span></div>
+          <a href="https://anoxil.com/products/anox-v4" target="_blank" style="font-size:12px;color:var(--green);">לרכישה ←</a>
+        </div>
+      </div>
+      <div class="sidebar-product">
+        <div class="sp-img">
+          <img src="img_scale.png" alt="משקל חכם" loading="lazy">
+        </div>
+        <div class="sp-info">
+          <div class="sp-name">משקל חכם</div>
+          <div><span class="sp-price-old">749 ₪</span><span class="sp-price">499 ₪</span></div>
+          <a href="https://anoxil.com/products/%D7%9E%D7%A9%D7%A7%D7%9C-%D7%97%D7%9B%D7%9D-%D7%9C%D7%9E%D7%93%D7%99%D7%93%D7%AA-%D7%9B%D7%9C-%D7%A0%D7%AA%D7%95%D7%A0%D7%99-%D7%94%D7%92%D7%95%D7%A3" target="_blank" style="font-size:12px;color:var(--green);">לרכישה ←</a>
+        </div>
+      </div>
+      <div class="sidebar-product">
+        <div class="sp-img">
+          <img src="img_halo.png" alt="HALO RING" loading="lazy">
+        </div>
+        <div class="sp-info">
+          <div class="sp-name">HALO RING</div>
+          <div><span class="sp-price-old">389 ₪</span><span class="sp-price">149 ₪</span></div>
+          <a href="https://anoxil.com/products/halo-ring" target="_blank" style="font-size:12px;color:var(--green);">לרכישה ←</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent articles -->
+    <div class="sidebar-widget">
+      <div class="widget-title">כתבות נוספות</div>
+      <ul class="recent-list">
+        <li><a href="#">5 הרגלים שמשפרים שינה — מבוסס נתוני ניטור</a></li>
+        <li><a href="#">מדריך לדופק מנוחה: מה טוב, מה לא ואיך משפרים</a></li>
+        <li><a href="#">שינה לעומת אנרגיה — הקשר שמפתיע אנשים</a></li>
+        <li><a href="#">ניטור עצמי: 30 יום ראשונים — מה ציפינו ומה קרה</a></li>
+        <li><a href="#">טכנולוגיה בשירות הבריאות — מגמות 2026</a></li>
+      </ul>
+    </div>
+
+    <!-- Tags -->
+    <div class="sidebar-widget">
+      <div class="widget-title">נושאים</div>
+      <div class="tag-cloud">
+        <span class="tag-pill">ניטור עצמי</span>
+        <span class="tag-pill">שינה</span>
+        <span class="tag-pill">דופק</span>
+        <span class="tag-pill">wellness</span>
+        <span class="tag-pill">כושר</span>
+        <span class="tag-pill">בריאות</span>
+        <span class="tag-pill">טכנולוגיה לבישה</span>
+        <span class="tag-pill">smart ring</span>
+        <span class="tag-pill">הרכב גוף</span>
+      </div>
+    </div>
+
+  </aside>
+
+</div>
+<!-- /page-layout -->
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div>מגזין Wellness ישראל · תוכן בריאות ואורח חיים</div>
+  <div class="footer-note">
+    הכתבה ממומנת בשיתוף ANOX. הקישורים בדף מובילים לאתר המותג anoxil.com.<br>
+    המחירים והמפרטים מבוססים על נתוני האתר נכון לתאריך הפרסום ועשויים להשתנות.
+  </div>
+</footer>
+
+</body>
+</html>
